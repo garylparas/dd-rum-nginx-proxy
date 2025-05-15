@@ -1,14 +1,11 @@
-FROM nginx:1.27-alpine
+FROM openresty/openresty:1.27.1.2-alpine
 
-# Copy required files
-COPY nginx.conf /etc/nginx/nginx.conf
+# Copy your configs
+COPY nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
 COPY entrypoint.sh /entrypoint.sh
 
 # Set permissions
 RUN chmod 500 /entrypoint.sh
 
-# Expose HTTP port
 EXPOSE 8080
-
-# Run entrypoint script
 ENTRYPOINT ["/entrypoint.sh"]
